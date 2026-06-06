@@ -46,6 +46,19 @@ img {
     display: block;
 }
 
+/* Базовое состояние скрытого элемента */
+.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+/* Состояние видимого элемента */
+.fade-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* ==========================================================================
    2. КНОПКИ
    ========================================================================== */
@@ -140,6 +153,23 @@ img {
     background-color: transparent;
     transition: var(--transition);
     white-space: nowrap; /* ЗАПРЕЩАЕМ перенос слов */
+}
+
+/* Изначально гамбургер скрыт на десктопе */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    z-index: 1001;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-dark);
+    border-radius: 3px;
+    transition: var(--transition);
 }
 
 /* Эффект при наведении курсора И для активного раздела */
@@ -306,7 +336,7 @@ img {
     position: relative;
 }
 
-.problem-header {
+/* .problem-header {
     max-width: 800px;
     margin: 0 auto 40px auto; 
     background: rgba(255, 255, 255, 0.55);
@@ -317,6 +347,18 @@ img {
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
     text-align: center;
+} */
+.problem-header h2, .problem-subtitle {
+    /* Добавляем белое сияние вокруг темного текста */
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 25px rgba(255, 255, 255, 0.7);
+    position: relative;
+    z-index: 2;
+}
+.problem-header h2 {
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: 20px;
 }
 
 .problem-header h2 {
@@ -772,9 +814,19 @@ img {
    8.5 БЛОК ДОВЕРИЯ (TRUST SECTION / COUNTERS)
    ========================================================================== */
 .trust-section {
-    padding: 60px 0;
-    background: linear-gradient(135deg, var(--color-blue) 0%, #158cb1 100%);
+    padding: 100px 0;
+    /* Увеличенный градиент для плавной анимации */
+    background: linear-gradient(-45deg, var(--color-blue), #0b7290, #158cb1, #44d6e9,  #60f0fd);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     color: var(--color-white);
+}
+
+/* Ключевые кадры для переливания фона */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .trust-container {
@@ -1308,22 +1360,44 @@ img {
     box-shadow: 0 4px 15px rgba(227, 6, 19, 0.4);
 }
 
+/* --- Стили для плавающей панели --- */
+.mobile-sticky-cta {
+    position: fixed;
+    bottom: -100%; /* Изначально спрятан за пределами экрана */
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(0,0,0,0.05);
+    padding: 15px 20px;
+    display: flex;
+    gap: 15px;
+    z-index: 1000;
+    transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 -10px 25px rgba(0,0,0,0.08);
+}
+
 /* ==========================================================================
    12. ОБЩАЯ АДАПТИВНОСТЬ (MEDIA QUERIES)
    ========================================================================== */
+/* Жесткий запрет на горизонтальный скролл */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* 1. Планшеты (от 851px до 992px) - Меню остается обычным */
 @media (max-width: 992px) {
-    /* Навбар */
-    .navbar-container {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch; 
-        padding-bottom: 5px;
-    }
-    .logo { flex-shrink: 0; }
-    .logo img { height: 40px; margin-right: 15px; }
-    .nav-links { display: flex; flex-wrap: nowrap; gap: 5px; }
-    .nav-links a { font-size: 14px; padding: 6px 12px; }
-    
+    /* Навбар: уменьшаем шрифт и логотип, чтобы всё влезло в строку */
+    .nav-links { gap: 2px; }
+    .nav-links a { font-size: 14px; padding: 8px 10px; }
+    .logo img { height: 50px; }
+
+    /* Секции: уменьшаем отступы */
+    .hero-section { padding-top: 110px; padding-bottom: 50px; }
+    .problem-section, .mechanism-section, .indications-section, .education-section, .advantages-section { padding: 60px 0; }
+
     /* Hero */
     .hero-container { grid-template-columns: 1fr; }
     .glass-card { padding: 30px; text-align: center; align-items: center; }
@@ -1331,25 +1405,36 @@ img {
     .hero-bullets li::before { display: none; }
     .cta-buttons { justify-content: center; }
     
-    /* Problem & Mechanism */
-    .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+    /* Сетки по 3 колонки (как было оговорено) */
+    .benefits-grid { grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .indications-gallery { grid-template-columns: repeat(3, 1fr); }
+    
     .mechanism-container { flex-direction: column; }
     .mechanism-video { min-height: 250px; }
+    .indications-content, .education-grid { flex-direction: column; text-align: center; }
     
-    /* Indications & Education */
-    .indications-content, .education-grid { flex-direction: column; }
-    .indications-gallery { grid-template-columns: repeat(2, 1fr); width: 100%; }
-    
-    /* Advantages & Trust */
+    /* === ИСПРАВЛЕНИЕ: Преимущества (Advantages) === */
     .advantages-container { flex-direction: column; }
+    .advantages-text { 
+        max-width: 100%; /* Отменяем ограничение в 500px */
+        margin: 0 auto; 
+        align-items: center; 
+        text-align: center; 
+    }
+    .check-list { 
+        display: inline-block; /* Список держится блоком по центру */
+        text-align: left; /* Но галочки и текст идут по левому краю */
+        margin: 0 auto;
+    }
+    .assortment-cta { text-align: center; width: 100%; }
+    .assortment-buttons { justify-content: center; margin-top: 15px; }
+    .catalog-subtitle { text-align: center; } /* Заголовки "Для профи" по центру */
+    
     .product-showcase { width: 100%; max-width: 600px; margin: 0 auto; }
     .trust-container { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
     
     /* CTA Banner */
-    .cta-banner-section { 
-        background-image: none; 
-        padding: 60px 0;
-    }
+    .cta-banner-section { background-image: none; padding: 60px 0; }
     .cta-card { grid-template-columns: 1fr; }
     .cta-text { 
         background: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.9)), url('links/CTA-bg.jpg');
@@ -1362,44 +1447,90 @@ img {
         margin-bottom: 20px; 
     }
     .marketplace-buttons { justify-content: center; }
-    
     .cta-image { min-height: 400px; }
+    .cta-overlay { top: 15%; left: 20px; right: 20px; text-align: center; }
+    .cta-overlay h3 { font-size: 24px; margin-bottom: 10px; }
+    .cta-logo { width: 65%; max-width: 260px; height: auto; margin: 0 auto; display: block; }
     
-    .cta-overlay {
-        top: 15%; 
-        left: 20px;
-        right: 20px;
-        text-align: center;
-    }
-    
-    .cta-overlay h3 {
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
-
-    .cta-logo {
-        width: 65%; 
-        max-width: 260px; 
-        height: auto;
-        margin: 0 auto;
-        display: block; 
-    }
-    
-    /* Footer */
     .footer-container { flex-direction: column; text-align: center; }
     .footer-copyright { text-align: center; }
 }
 
-@media (max-width: 768px) {
-    .problem-header h2, .education-header h2 { font-size: 28px; }
-    .benefits-grid { grid-template-columns: 1fr; }
-    .play-button { width: 60px; height: 60px; }
-    .play-icon { border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 16px solid var(--color-white); }
+/* 2. Мобильное меню (Гамбургер) - появляется только на узких экранах */
+@media (max-width: 850px) {
+    .hamburger { display: flex; }
+    .nav-links {
+        position: absolute;
+        top: 90px; 
+        left: -100%; 
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 0;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        transition: left 0.4s ease;
+        gap: 15px;
+    }
+    .nav-links.active-menu { left: 0; }
+    .nav-links a { font-size: 18px; padding: 12px 24px; width: 100%; text-align: center; }
+    
+    .hamburger.toggle span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+    .hamburger.toggle span:nth-child(2) { opacity: 0; }
+    .hamburger.toggle span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
 }
 
+/* 3. Мобильные телефоны и планшеты (до 768px) */
+@media (max-width: 768px) {
+    .problem-header h2, .education-header h2, .mechanism-title { font-size: 28px; }
+    
+    /* Карточки эффектов оставляем по 2 в ряд (для читаемости текста) */
+    .benefits-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .benefit-card { padding: 15px 10px; }
+    .benefit-icon img { width: 50px; } 
+    .benefit-card h3 { font-size: 16px; }
+    .benefit-card p { font-size: 13px; line-height: 1.4; }
+    
+    /* Фотографии аппликаций на 768px остаются в 3 колонки (убрали переопределение) */
+    .gallery-overlay { padding: 15px 10px 10px 10px; }
+    .gallery-overlay span { font-size: 12px; }
+
+    .play-button { width: 60px; height: 60px; }
+    .play-icon { border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 16px solid var(--color-white); }
+.site-footer { padding-bottom: 90px; }
+}
+
+/* Класс, который будет добавлять JS */
+.mobile-sticky-cta.visible {
+    bottom: 0;
+}
+
+.mobile-sticky-cta .btn {
+    flex: 1;
+    padding: 12px 0;
+    font-size: 15px;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Скрываем блок на десктопах и планшетах */
+@media (min-width: 769px) {
+    .mobile-sticky-cta {
+        display: none !important;
+    }
+}
+
+/* 4. Самые узкие экраны - мобильные телефоны (до 576px) */
 @media (max-width: 576px) {
-    .indications-gallery { grid-template-columns: 1fr; }
+    /* Товары в 1 колонку */
     .product-grid, .grid-2 { grid-template-columns: 1fr; }
-    .product-showcase .wide { grid-column: span 1; }
+    
+    /* А вот на узких телефонах фотки аппликаций ставим по 2 в ряд, чтобы не были огромными */
+    .indications-gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    
     .back-to-top { bottom: 20px; right: 20px; width: 45px; height: 45px; }
 }

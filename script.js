@@ -103,3 +103,53 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    // === Бутерброд-меню для мобильных ===
+    const hamburger = document.getElementById('hamburger');
+    const navLinksMenu = document.getElementById('nav-links');
+    const navLinksItems = document.querySelectorAll('.nav-links a');
+
+    if(hamburger) {
+        hamburger.addEventListener('click', () => {
+            navLinksMenu.classList.toggle('active-menu');
+            hamburger.classList.toggle('toggle');
+        });
+
+        // Закрываем меню при клике на любую ссылку
+        navLinksItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinksMenu.classList.remove('active-menu');
+                hamburger.classList.remove('toggle');
+            });
+        });
+    }
+    // === Плавающие кнопки (Sticky CTA) для мобильных ===
+    const stickyCta = document.getElementById('sticky-cta');
+    const heroSection = document.querySelector('.hero-section');
+
+    if (stickyCta && heroSection) {
+        const ctaObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // Если первый экран (hero) скрылся из виду — показываем кнопки
+                if (!entry.isIntersecting) {
+                    stickyCta.classList.add('visible');
+                } else {
+                    stickyCta.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.1 }); // Срабатывает, когда от hero остается 10%
+
+        ctaObserver.observe(heroSection);
+    }
+    // === Плавное появление элементов при скролле ===
+    const fadeElements = document.querySelectorAll('.fade-up');
+    
+    const fadeObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target); // Анимируем только один раз
+            }
+        });
+    }, { rootMargin: '0px 0px -50px 0px' }); // Триггер срабатывает чуть раньше нижней границы экрана
+
+    fadeElements.forEach(el => fadeObserver.observe(el));
