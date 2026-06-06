@@ -104,6 +104,8 @@ img {
    ========================================================================== */
 .navbar {
     background-color: var(--color-white);
+    /* background-color: color-mix(in srgb, var(--color-white) 80%, transparent);
+    backdrop-filter: blur(16px); */
     border-bottom: 1px solid #E5E7EB;
     position: fixed;
     top: 0;
@@ -336,8 +338,8 @@ img {
     position: relative;
 }
 
-/* .problem-header {
-    max-width: 800px;
+.problem-header {
+    /* max-width: 800px; */
     margin: 0 auto 40px auto; 
     background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(12px);
@@ -347,12 +349,15 @@ img {
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
     text-align: center;
-} */
+}
+
 .problem-header h2, .problem-subtitle {
     /* Добавляем белое сияние вокруг темного текста */
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 25px rgba(255, 255, 255, 0.7);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.9), 0 0 5px rgba(255, 255, 255, 0.9);
     position: relative;
     z-index: 2;
+    /* text-align: center; */
+    /* padding: 40px; */
 }
 .problem-header h2 {
     font-size: 38px;
@@ -816,7 +821,7 @@ img {
 .trust-section {
     padding: 100px 0;
     /* Увеличенный градиент для плавной анимации */
-    background: linear-gradient(-45deg, var(--color-blue), #0b7290, #158cb1, #44d6e9,  #60f0fd);
+    background: linear-gradient(-45deg, var(--color-blue), #0b7290, #158cb1, #44d6e9, #ff33cc);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     color: var(--color-white);
@@ -863,7 +868,7 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    line-height: 1;
+    /* line-height: 1; */
 }
 
 .plus {
@@ -881,7 +886,7 @@ img {
 .korea-badge {
     background: rgba(255, 255, 255, 0.95);
     color: var(--color-dark);
-    border: 1px solid var(--color-red);
+    /* border: 1px solid var(--color-red); */
 }
 
 .korea-badge:hover {
@@ -1004,10 +1009,11 @@ img {
 }
 
 .assortment-buttons {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch; /* 🪄 Главная магия: растягивает кнопку каталога и нижний ряд до одинаковой ширины */
+    gap: 15px;
+    margin-top: 10px;
 }
 
 .btn-outline {
@@ -1032,21 +1038,57 @@ img {
     transform: translateY(-2px);
 }
 
+/* --- Стили для мини-кнопок в разделе Преимущества --- */
 .mp-mini-links {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-weight: 700;
-    font-size: 15px;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+}
+
+.mp-mini-links a {
+    flex: 1; /* Делает кнопки Ozon и WB идеально одинаковыми по ширине */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 14px; /* Сделали их чуть "пухлее", вровень с верхней кнопкой */
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.mp-mini-links .link-ozon {
+    background-color: #005BFF;
+}
+.mp-mini-links .link-ozon:hover {
+    background-color: #004DDA;
+    transform: translateY(-2px);
+}
+
+.mp-mini-links .link-wb {
+    background: linear-gradient(90deg, #ff33cc 0%, #7f30e3 100%);
+}
+.mp-mini-links .link-wb:hover {
+    background: linear-gradient(90deg, #a30d89 0%, #9d61ea 100%);
+    transform: translateY(-2px);
+}
+
+.mp-mini-links img {
+    height: 16px; /* Чуть увеличили логотипы для лучшей читаемости */
+    width: auto;
+    display: block;
 }
 
 .link-ozon { color: #005BFF; text-decoration: none; transition: var(--transition); }
 .link-ozon:hover { color: #004DDA; }
 
-.link-wb { color: #CB11AB; text-decoration: none; transition: var(--transition); }
-.link-wb:hover { color: #A30D89; }
+.link-wb { color: #7f30e3; text-decoration: none; transition: var(--transition); }
+.link-wb:hover { color: #9d61ea; }
 
-.divider { color: #D1D5DB; }
+.divider { 
+    color: #D1D5DB; 
+    line-height: 1;
+}
 
 .product-showcase {
     flex: 1;
@@ -1216,6 +1258,10 @@ img {
     background-color: #005BFF; 
     color: var(--color-white);
     border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0px; /* Расстояние между текстом и логотипом */
 }
 .btn-ozon:hover {
     background-color: #004DDA;
@@ -1223,13 +1269,32 @@ img {
 }
 
 .btn-wb {
-    background-color: #CB11AB; 
+    /* Тот самый фирменный градиент WB */
+    background: linear-gradient(90deg, #ff33cc 0%, #7d17f7 100%); 
     color: var(--color-white);
     border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 .btn-wb:hover {
-    background-color: #A30D89;
+    background: linear-gradient(90deg, #a30d89 0%, #9d61ea 100%);
     transform: translateY(-2px);
+}
+
+/* Размеры логотипов внутри больших кнопок (баннер) */
+.btn-logo {
+    height: 18px; /* Подгони под визуальный баланс шрифта */
+    width: auto;
+    display: block;
+}
+
+/* Размеры логотипов в мобильной липкой панели */
+.btn-logo-large {
+    height: 24px;
+    width: auto;
+    display: block;
 }
 
 .cta-image {
@@ -1459,20 +1524,23 @@ html, body {
 /* 2. Мобильное меню (Гамбургер) - появляется только на узких экранах */
 @media (max-width: 850px) {
     .hamburger { display: flex; }
-    .nav-links {
-        position: absolute;
+.nav-links {
+        position: fixed; /* КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ: вытаскиваем меню поверх всей страницы */
         top: 90px; 
         left: -100%; 
         width: 100%;
-        background-color: rgba(255, 255, 255, 0.95);
+        height: calc(100vh - 90px); /* Занимаем всю высоту экрана минус шапка */
+        background-color: rgba(255, 255, 255, 0.65);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         flex-direction: column;
         align-items: center;
-        padding: 30px 0;
+        justify-content: flex-start; /* Чтобы пункты аккуратно начинались сверху */
+        padding: 60px 0; /* Увеличили отступ сверху для «воздуха» */
         box-shadow: 0 10px 15px rgba(0,0,0,0.1);
         transition: left 0.4s ease;
-        gap: 15px;
+        gap: 20px;
+        overflow-y: auto; /* Позволяем скроллить меню, если экран очень маленький */
     }
     .nav-links.active-menu { left: 0; }
     .nav-links a { font-size: 18px; padding: 12px 24px; width: 100%; text-align: center; }

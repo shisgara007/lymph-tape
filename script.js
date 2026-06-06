@@ -140,16 +140,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         ctaObserver.observe(heroSection);
     }
-    // === Плавное появление элементов при скролле ===
+    // === Плавное появление элементов при скролле (МНОГОРАЗОВОЕ) ===
     const fadeElements = document.querySelectorAll('.fade-up');
     
-    const fadeObserver = new IntersectionObserver((entries, observer) => {
+    const fadeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // Если блок появился на экране — показываем
                 entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target); // Анимируем только один раз
+            } else {
+                // Если блок ушел с экрана — прячем обратно (чтобы потом снова показать)
+                entry.target.classList.remove('is-visible');
             }
         });
-    }, { rootMargin: '0px 0px -50px 0px' }); // Триггер срабатывает чуть раньше нижней границы экрана
+    }, { rootMargin: '0px 0px -50px 0px' }); 
 
     fadeElements.forEach(el => fadeObserver.observe(el));
