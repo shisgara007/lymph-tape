@@ -297,6 +297,13 @@ img {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
+    width: 100%; /* Растягиваем контейнер */
+}
+
+/* Это заставит кнопки делиться поровну, а на телефоне переноситься в 2 строки на всю ширину */
+.cta-buttons .btn {
+    flex: 1; 
+    min-width: 220px; 
 }
 
 .hero-content .btn-primary {
@@ -443,7 +450,7 @@ img {
    6. МЕХАНИКА РАБОТЫ (MECHANISM SECTION)
    ========================================================================== */
 .mechanism-section {
-    padding: 100px 0;
+    padding: 60px 0;
     background-color: var(--color-light); 
 }
 
@@ -618,7 +625,7 @@ img {
    7. ПОКАЗАНИЯ И ГАЛЕРЕЯ (INDICATIONS SECTION)
    ========================================================================== */
 .indications-section {
-    padding: 100px 0;
+    padding: 60px 0;
     background-color: var(--color-white);
 }
 
@@ -706,7 +713,7 @@ img {
    8. ОБУЧАЮЩИЙ РАЗДЕЛ (EDUCATION GRID)
    ========================================================================== */
 .education-section {
-    padding: 100px 0;
+    padding: 60px 0;
     background-color: var(--color-light); 
 }
 
@@ -926,7 +933,7 @@ img {
    9. ПРЕИМУЩЕСТВА И КАТАЛОГ (ADVANTAGES SECTION)
    ========================================================================== */
 .advantages-section {
-    padding: 100px 0;
+    padding: 60px 0;
     background-color: var(--color-white); 
     background-image: url('links/bg-waves.svg'); 
     background-size: cover; 
@@ -1009,11 +1016,59 @@ img {
 }
 
 .assortment-buttons {
-    display: inline-flex;
+    display: flex; /* Убрали inline-flex */
     flex-direction: column;
-    align-items: stretch; /* 🪄 Главная магия: растягивает кнопку каталога и нижний ряд до одинаковой ширины */
+    align-items: stretch; 
+    width: 100%; /* Теперь блок занимает всю ширину текста над ним */
     gap: 15px;
     margin-top: 10px;
+}
+
+/* --- Стили для мини-кнопок в разделе Преимущества --- */
+.mp-mini-links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 15px;
+}
+
+.mp-mini-links a {
+    flex: 1; /* Кнопки Ozon и WB строго 50/50 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 14px; /* Сделали их крупнее и комфортнее для нажатия */
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.mp-mini-links .link-ozon {
+    background-color: #005BFF;
+}
+.mp-mini-links .link-ozon:hover {
+    background-color: #004DDA;
+    transform: translateY(-2px);
+}
+
+.mp-mini-links .link-wb {
+    /* Твой новый шикарный градиент */
+    background: linear-gradient(90deg, #ff33cc 0%, #7f30e3 100%);
+}
+.mp-mini-links .link-wb:hover {
+    background: linear-gradient(90deg, #a30d89 0%, #9d61ea 100%);
+    transform: translateY(-2px);
+}
+
+.mp-mini-links img {
+    height: 16px; 
+    width: auto;
+    display: block;
+}
+
+.divider { 
+    color: #D1D5DB; 
+    line-height: 1;
 }
 
 .btn-outline {
@@ -1036,58 +1091,6 @@ img {
     background-color: var(--color-blue);
     color: var(--color-white);
     transform: translateY(-2px);
-}
-
-/* --- Стили для мини-кнопок в разделе Преимущества --- */
-.mp-mini-links {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    gap: 10px;
-}
-
-.mp-mini-links a {
-    flex: 1; /* Делает кнопки Ozon и WB идеально одинаковыми по ширине */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 14px; /* Сделали их чуть "пухлее", вровень с верхней кнопкой */
-    border-radius: 8px;
-    transition: var(--transition);
-}
-
-.mp-mini-links .link-ozon {
-    background-color: #005BFF;
-}
-.mp-mini-links .link-ozon:hover {
-    background-color: #004DDA;
-    transform: translateY(-2px);
-}
-
-.mp-mini-links .link-wb {
-    background: linear-gradient(90deg, #ff33cc 0%, #7f30e3 100%);
-}
-.mp-mini-links .link-wb:hover {
-    background: linear-gradient(90deg, #a30d89 0%, #9d61ea 100%);
-    transform: translateY(-2px);
-}
-
-.mp-mini-links img {
-    height: 16px; /* Чуть увеличили логотипы для лучшей читаемости */
-    width: auto;
-    display: block;
-}
-
-.link-ozon { color: #005BFF; text-decoration: none; transition: var(--transition); }
-.link-ozon:hover { color: #004DDA; }
-
-.link-wb { color: #7f30e3; text-decoration: none; transition: var(--transition); }
-.link-wb:hover { color: #9d61ea; }
-
-.divider { 
-    color: #D1D5DB; 
-    line-height: 1;
 }
 
 .product-showcase {
@@ -1201,7 +1204,7 @@ img {
    10. ФИНАЛЬНЫЙ БАННЕР (CTA BANNER SECTION)
    ========================================================================== */
 .cta-banner-section {
-    padding: 80px 0 100px 0;
+    padding: 80px 0 60px 0;
     background-color: var(--color-white);
     background-image: url('links/CTA-bg.jpg');
     background-position: left center;
@@ -1252,6 +1255,13 @@ img {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
+    width: 100%; /* Растягиваем контейнер */
+}
+
+/* Делаем их одинаковыми */
+.marketplace-buttons .btn {
+    flex: 1;
+    min-width: 200px;
 }
 
 .btn-ozon {
@@ -1261,7 +1271,7 @@ img {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0px; /* Расстояние между текстом и логотипом */
+    gap: 8px;
 }
 .btn-ozon:hover {
     background-color: #004DDA;
@@ -1269,8 +1279,8 @@ img {
 }
 
 .btn-wb {
-    /* Тот самый фирменный градиент WB */
-    background: linear-gradient(90deg, #ff33cc 0%, #7d17f7 100%); 
+    /* Новый градиент для больших кнопок */
+    background: linear-gradient(90deg, #ff33cc 0%, #7f30e3 100%); 
     color: var(--color-white);
     border: none;
     display: inline-flex;
@@ -1283,9 +1293,8 @@ img {
     transform: translateY(-2px);
 }
 
-/* Размеры логотипов внутри больших кнопок (баннер) */
 .btn-logo {
-    height: 18px; /* Подгони под визуальный баланс шрифта */
+    height: 18px; 
     width: auto;
     display: block;
 }
