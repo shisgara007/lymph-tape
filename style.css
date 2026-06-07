@@ -265,6 +265,7 @@ img {
 .hero-bullets {
     list-style: none;
     margin-bottom: 25px;
+    padding: 0;
 }
 
 .hero-bullets li {
@@ -1561,8 +1562,10 @@ html, body {
 
 /* 3. Мобильные телефоны и планшеты (до 768px) */
 @media (max-width: 768px) {
-    .problem-header h2, .education-header h2, .mechanism-title { font-size: 28px; }
-    
+.problem-header h2, .education-text h2, .mechanism-title, .advantages-text h2 { 
+        font-size: 26px; 
+        word-wrap: break-word; /* Автоматически переносит длинные слова */
+    }    
     /* Карточки эффектов оставляем по 2 в ряд (для читаемости текста) */
     .benefits-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .benefit-card { padding: 15px 10px; }
@@ -1603,10 +1606,13 @@ html, body {
 
 /* 4. Самые узкие экраны - мобильные телефоны (до 576px) */
 @media (max-width: 576px) {
+    .problem-header h2, .education-text h2, .mechanism-title, .advantages-text h2 { 
+        font-size: 22px; 
+    }
     /* Товары в 1 колонку */
     .product-grid, .grid-2 { grid-template-columns: 1fr; }
     
-    /* А вот на узких телефонах фотки аппликаций ставим по 2 в ряд, чтобы не были огромными */
+    /* Фотки аппликаций по 2 в ряд */
     .indications-gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     
     .back-to-top { bottom: 20px; right: 20px; width: 45px; height: 45px; }
