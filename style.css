@@ -249,7 +249,7 @@ img {
 
 .hero-tag {
     display: inline-block;
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: rgba(28, 170, 212, 0.5);
     color: var(--color-white);
     padding: 6px 16px;
     border-radius: 50px;
@@ -1562,6 +1562,33 @@ html, body {
 
 /* 3. Мобильные телефоны и планшеты (до 768px) */
 @media (max-width: 768px) {
+/* --- Фикс для главного экрана (Hero) --- */
+    
+    /* Уменьшаем гигантские шрифты, чтобы они не распирали экран */
+    .hero-content h1 {
+        font-size: 32px; 
+        word-wrap: break-word;
+    }
+    
+    .hero-bullets li {
+        font-size: 18px; 
+    }
+    
+    .hero-description {
+        font-size: 14px;
+    }
+    
+    /* Сужаем внутренние отступы карточки, давая больше места тексту */
+    .glass-card {
+        padding: 25px 15px; 
+    }
+    
+    /* Центрируем верхнюю капсулу для симметрии */
+    .hero-tag {
+        align-self: center; 
+        margin-bottom: 15px;
+    }
+
 .problem-header h2, .education-text h2, .mechanism-title, .advantages-text h2 { 
         font-size: 26px; 
         word-wrap: break-word; /* Автоматически переносит длинные слова */
