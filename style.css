@@ -1360,97 +1360,107 @@ img {
    ========================================================================== */
 .site-footer {
     background-color: var(--color-dark);
-    color: var(--color-white);
-    padding: 60px 0 40px 0;
+    color: #9CA3AF;
+    padding: 80px 0 30px 0;
+    font-size: 14px;
 }
 
-.footer-container {
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.footer-brand .footer-logo {
+    height: 60px; 
+    margin-bottom: 20px;
+    display: block;
+    /* Убрали фильтр invert, чтобы сохранить оригинальный цвет логотипа */
+}
+
+.footer-brand p {
+    line-height: 1.6;
+    max-width: 320px;
+}
+
+.site-footer h4 {
+    color: var(--color-white);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer-nav, .footer-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.footer-nav a, .footer-contacts a {
+    color: #9CA3AF;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-nav a:hover, .footer-contacts a:hover {
+    color: var(--color-white);
+}
+
+.footer-contacts .phone {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-white);
+    letter-spacing: 0.5px;
+}
+
+.footer-contacts .work-time {
+    font-size: 13px;
+    opacity: 0.7;
+    margin-top: -10px;
+    margin-bottom: 5px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--color-white);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-icons a:hover {
+    background-color: var(--color-red);
+    border-color: var(--color-red);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 30px;
-}
-
-.footer-logo img {
-    height: 40px;
-    /* filter: brightness(0) invert(1);  */
-}
-
-.footer-info {
-    text-align: center;
-}
-
-.footer-info p {
-    color: #9CA3AF;
-    font-size: 14px;
-    margin-bottom: 15px;
-}
-
-.footer-links {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-}
-
-.footer-links a {
-    color: var(--color-white);
-    text-decoration: none;
-    font-size: 14px;
-    transition: var(--transition);
-}
-
-.footer-links a:hover {
-    color: var(--color-blue);
-}
-
-.footer-copyright {
-    color: #6B7280;
     font-size: 13px;
-    text-align: right;
 }
 
-.back-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background-color: var(--color-blue);
-    color: var(--color-white);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(28, 169, 212, 0.4);
-    transition: var(--transition);
-    z-index: 999;
-    opacity: 0.8;
-}
-
-.back-to-top:hover {
-    opacity: 1;
-    transform: translateY(-3px);
-    background-color: var(--color-red);
-    box-shadow: 0 4px 15px rgba(227, 6, 19, 0.4);
-}
-
-/* --- Стили для плавающей панели --- */
-.mobile-sticky-cta {
-    position: fixed;
-    bottom: -100%; /* Изначально спрятан за пределами экрана */
-    left: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-top: 1px solid rgba(0,0,0,0.05);
-    padding: 15px 20px;
-    display: flex;
-    gap: 15px;
-    z-index: 1000;
-    transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 -10px 25px rgba(0,0,0,0.08);
+.footer-bottom .legal {
+    opacity: 0.6;
 }
 
 /* ==========================================================================
@@ -1462,154 +1472,24 @@ html, body {
     width: 100%;
 }
 
-/* 1. Планшеты (от 851px до 992px) - Меню остается обычным */
-@media (max-width: 992px) {
-    /* Навбар: уменьшаем шрифт и логотип, чтобы всё влезло в строку */
-    .nav-links { gap: 2px; }
-    .nav-links a { font-size: 14px; padding: 8px 10px; }
-    .logo img { height: 50px; }
-
-    /* Секции: уменьшаем отступы */
-    .hero-section { padding-top: 110px; padding-bottom: 50px; }
-    .problem-section, .mechanism-section, .indications-section, .education-section, .advantages-section { padding: 60px 0; }
-
-    /* Hero */
-    .hero-container { grid-template-columns: 1fr; }
-    .glass-card { padding: 30px; text-align: center; align-items: center; }
-    .hero-bullets li { padding-left: 0; }
-    .hero-bullets li::before { display: none; }
-    .cta-buttons { justify-content: center; }
-    
-    /* Сетки по 3 колонки (как было оговорено) */
-    .benefits-grid { grid-template-columns: repeat(3, 1fr); gap: 15px; }
-    .indications-gallery { grid-template-columns: repeat(3, 1fr); }
-    
-    .mechanism-container { flex-direction: column; }
-    .mechanism-video { min-height: 250px; }
-    .indications-content, .education-grid { flex-direction: column; text-align: center; }
-    
-    /* === ИСПРАВЛЕНИЕ: Преимущества (Advantages) === */
-    .advantages-container { flex-direction: column; }
-    .advantages-text { 
-        max-width: 100%; /* Отменяем ограничение в 500px */
-        margin: 0 auto; 
-        align-items: center; 
-        text-align: center; 
-    }
-    .check-list { 
-        display: inline-block; /* Список держится блоком по центру */
-        text-align: left; /* Но галочки и текст идут по левому краю */
-        margin: 0 auto;
-    }
-    .assortment-cta { text-align: center; width: 100%; }
-    .assortment-buttons { justify-content: center; margin-top: 15px; }
-    .catalog-subtitle { text-align: center; } /* Заголовки "Для профи" по центру */
-    
-    .product-showcase { width: 100%; max-width: 600px; margin: 0 auto; }
-    .trust-container { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-    
-    /* CTA Banner */
-    .cta-banner-section { background-image: none; padding: 60px 0; }
-    .cta-card { grid-template-columns: 1fr; }
-    .cta-text { 
-        background: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.9)), url('links/CTA-bg.jpg');
-        background-size: cover;
-        background-position: center left;
-        padding: 40px 30px; 
-        text-align: center; 
-        align-items: center; 
-        margin-left: 0; 
-        margin-bottom: 20px; 
-    }
-    .marketplace-buttons { justify-content: center; }
-    .cta-image { min-height: 400px; }
-    .cta-overlay { top: 15%; left: 20px; right: 20px; text-align: center; }
-    .cta-overlay h3 { font-size: 24px; margin-bottom: 10px; }
-    .cta-logo { width: 65%; max-width: 260px; height: auto; margin: 0 auto; display: block; }
-    
-    .footer-container { flex-direction: column; text-align: center; }
-    .footer-copyright { text-align: center; }
+/* --- Стили для плавающей панели (базовые) --- */
+.mobile-sticky-cta {
+    position: fixed;
+    bottom: -100%; /* Изначально спрятан за пределами экрана */
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(0,0,0,0.05);
+    padding: 15px 20px;
+    display: flex;
+    gap: 15px;
+    z-index: 1000;
+    transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 -10px 25px rgba(0,0,0,0.08);
 }
 
-/* 2. Мобильное меню (Гамбургер) - появляется только на узких экранах */
-@media (max-width: 850px) {
-    .hamburger { display: flex; }
-.nav-links {
-        position: fixed; /* КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ: вытаскиваем меню поверх всей страницы */
-        top: 90px; 
-        left: -100%; 
-        width: 100%;
-        height: calc(100vh - 90px); /* Занимаем всю высоту экрана минус шапка */
-        background-color: rgba(255, 255, 255, 0.65);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start; /* Чтобы пункты аккуратно начинались сверху */
-        padding: 60px 0; /* Увеличили отступ сверху для «воздуха» */
-        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-        transition: left 0.4s ease;
-        gap: 20px;
-        overflow-y: auto; /* Позволяем скроллить меню, если экран очень маленький */
-    }
-    .nav-links.active-menu { left: 0; }
-    .nav-links a { font-size: 18px; padding: 12px 24px; width: 100%; text-align: center; }
-    
-    .hamburger.toggle span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
-    .hamburger.toggle span:nth-child(2) { opacity: 0; }
-    .hamburger.toggle span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
-}
-
-/* 3. Мобильные телефоны и планшеты (до 768px) */
-@media (max-width: 768px) {
-/* --- Фикс для главного экрана (Hero) --- */
-    
-    /* Уменьшаем гигантские шрифты, чтобы они не распирали экран */
-    .hero-content h1 {
-        font-size: 32px; 
-        word-wrap: break-word;
-    }
-    
-    .hero-bullets li {
-        font-size: 18px; 
-    }
-    
-    .hero-description {
-        font-size: 14px;
-    }
-    
-    /* Сужаем внутренние отступы карточки, давая больше места тексту */
-    .glass-card {
-        padding: 25px 15px; 
-    }
-    
-    /* Центрируем верхнюю капсулу для симметрии */
-    .hero-tag {
-        align-self: center; 
-        margin-bottom: 15px;
-    }
-
-.problem-header h2, .education-text h2, .mechanism-title, .advantages-text h2 { 
-        font-size: 26px; 
-        word-wrap: break-word; /* Автоматически переносит длинные слова */
-    }    
-    /* Карточки эффектов оставляем по 2 в ряд (для читаемости текста) */
-    .benefits-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .benefit-card { padding: 15px 10px; }
-    .benefit-icon img { width: 50px; } 
-    .benefit-card h3 { font-size: 16px; }
-    .benefit-card p { font-size: 13px; line-height: 1.4; }
-    
-    /* Фотографии аппликаций на 768px остаются в 3 колонки (убрали переопределение) */
-    .gallery-overlay { padding: 15px 10px 10px 10px; }
-    .gallery-overlay span { font-size: 12px; }
-
-    .play-button { width: 60px; height: 60px; }
-    .play-icon { border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 16px solid var(--color-white); }
-.site-footer { padding-bottom: 90px; }
-}
-
-/* Класс, который будет добавлять JS */
 .mobile-sticky-cta.visible {
     bottom: 0;
 }
@@ -1624,23 +1504,134 @@ html, body {
     font-weight: 600;
 }
 
-/* Скрываем блок на десктопах и планшетах */
+/* Скрываем липкий блок на десктопах и больших планшетах */
 @media (min-width: 769px) {
     .mobile-sticky-cta {
         display: none !important;
     }
 }
 
+
+/* 1. Планшеты (от 851px до 992px) */
+@media (max-width: 992px) {
+    /* Навбар */
+    .nav-links { gap: 2px; }
+    .nav-links a { font-size: 14px; padding: 8px 10px; }
+    .logo img { height: 50px; }
+
+    /* Секции */
+    .hero-section { padding-top: 110px; padding-bottom: 50px; }
+    .problem-section, .mechanism-section, .indications-section, .education-section, .advantages-section { padding: 60px 0; }
+
+    /* Hero */
+    .hero-container { grid-template-columns: 1fr; }
+    .glass-card { padding: 30px; text-align: center; align-items: center; }
+    .hero-bullets li { padding-left: 0; }
+    .hero-bullets li::before { display: none; }
+    .cta-buttons { justify-content: center; }
+    
+    /* Сетки */
+    .benefits-grid { grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .indications-gallery { grid-template-columns: repeat(3, 1fr); }
+    
+    .mechanism-container { flex-direction: column; }
+    .mechanism-video { min-height: 250px; }
+    .indications-content, .education-grid { flex-direction: column; text-align: center; }
+    
+    /* Преимущества */
+    .advantages-container { flex-direction: column; }
+    .advantages-text { max-width: 100%; margin: 0 auto; align-items: center; text-align: center; }
+    .check-list { display: inline-block; text-align: left; margin: 0 auto; }
+    .assortment-cta { text-align: center; width: 100%; }
+    .assortment-buttons { justify-content: center; margin-top: 15px; }
+    .catalog-subtitle { text-align: center; } 
+    
+    .product-showcase { width: 100%; max-width: 600px; margin: 0 auto; }
+    .trust-container { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    
+    /* CTA Banner */
+    .cta-banner-section { background-image: none; padding: 60px 0; }
+    .cta-card { grid-template-columns: 1fr; }
+    .cta-text { 
+        background: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.9)), url('links/CTA-bg.jpg');
+        background-size: cover; background-position: center left;
+        padding: 40px 30px; text-align: center; align-items: center; 
+        margin-left: 0; margin-bottom: 20px; 
+    }
+    .marketplace-buttons { justify-content: center; }
+    .cta-image { min-height: 400px; }
+    .cta-overlay { top: 15%; left: 20px; right: 20px; text-align: center; }
+    .cta-overlay h3 { font-size: 24px; margin-bottom: 10px; }
+    .cta-logo { width: 65%; max-width: 260px; height: auto; margin: 0 auto; display: block; }
+    
+    /* Подвал (Планшет: 2 колонки) */
+    .footer-container { flex-direction: column; text-align: center; }
+    .footer-copyright { text-align: center; }
+    .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 20px; text-align: left; }
+    .footer-bottom { flex-direction: column; gap: 15px; }
+}
+
+/* 2. Мобильное меню (Гамбургер) */
+@media (max-width: 850px) {
+    .hamburger { display: flex; }
+    .nav-links {
+        position: fixed; 
+        top: 90px; left: -100%; width: 100%; height: calc(100vh - 90px); 
+        background-color: rgba(255, 255, 255, 0.65);
+        backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        flex-direction: column; align-items: center; justify-content: flex-start; 
+        padding: 60px 0; box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        transition: left 0.4s ease; gap: 20px; overflow-y: auto; 
+    }
+    .nav-links.active-menu { left: 0; }
+    .nav-links a { font-size: 18px; padding: 12px 24px; width: 100%; text-align: center; }
+    
+    .hamburger.toggle span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+    .hamburger.toggle span:nth-child(2) { opacity: 0; }
+    .hamburger.toggle span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+}
+
+/* 3. Мобильные телефоны и планшеты (до 768px) */
+@media (max-width: 768px) {
+    /* Фикс для главного экрана */
+    .hero-content h1 { font-size: 32px; word-wrap: break-word; }
+    .hero-bullets li { font-size: 18px; }
+    .hero-description { font-size: 14px; }
+    .glass-card { padding: 25px 15px; }
+    .hero-tag { align-self: center; margin-bottom: 15px; }
+
+    .problem-header h2, .education-text h2, .mechanism-title, .advantages-text h2 { 
+        font-size: 26px; word-wrap: break-word; 
+    }    
+    
+    /* Карточки по 2 в ряд */
+    .benefits-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .benefit-card { padding: 15px 10px; }
+    .benefit-icon img { width: 50px; } 
+    .benefit-card h3 { font-size: 16px; }
+    .benefit-card p { font-size: 13px; line-height: 1.4; }
+    
+    .gallery-overlay { padding: 15px 10px 10px 10px; }
+    .gallery-overlay span { font-size: 12px; }
+
+    .play-button { width: 60px; height: 60px; }
+    .play-icon { border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 16px solid var(--color-white); }
+    
+    /* Отступ снизу для липкой панели */
+    .site-footer { padding-bottom: 90px; }
+    
+    /* Подвал (Мобилка: 1 колонка) */
+    .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+    .footer-brand p { margin: 0 auto; }
+    .footer-logo { margin: 0 auto 20px auto; }
+    .social-icons { justify-content: center; }
+}
+
 /* 4. Самые узкие экраны - мобильные телефоны (до 576px) */
 @media (max-width: 576px) {
-    .problem-header h2, .education-text h2, .mechanism-title, .advantages-text h2 { 
-        font-size: 22px; 
-    }
-    /* Товары в 1 колонку */
+    .problem-header h2, .education-text h2, .mechanism-title, .advantages-text h2 { font-size: 22px; }
+    
     .product-grid, .grid-2 { grid-template-columns: 1fr; }
-    
-    /* Фотки аппликаций по 2 в ряд */
     .indications-gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    
     .back-to-top { bottom: 20px; right: 20px; width: 45px; height: 45px; }
 }
